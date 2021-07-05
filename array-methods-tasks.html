@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Array-methods-tasks</title>
+	</head>
+	<body></body>
+	<script>
+		/* Напишите функцию camelize(str), которая преобразует строки вида «my-short-string» в «myShortString».
+				То есть дефисы удаляются, а все слова после них получают заглавную букву.
+				Примеры:
+
+				camelize("background-color") == 'backgroundColor'; camelize("list-style-image") == 'listStyleImage';
+				camelize("-webkit-transition") == 'WebkitTransition';
+
+				P.S. Подсказка: используйте split, чтобы
+				разбить строку на массив символов, потом переделайте всё как нужно и методом join соедините обратно */
+
+		function camelize(str) {
+			const camelStr = str
+				.split("-")
+				.map((word, index) => (index !== 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word))
+				.join("")
+
+			return camelStr
+		}
+
+		console.log(camelize("list-style-image"))
+		console.log(camelize("-webkit-transition"))
+
+		/* Напишите функцию filterRange(arr, a, b), которая принимает массив arr, ищет в нём элементы между a и b и отдаёт массив этих элементов.
+
+				Функция должна возвращать новый массив и не изменять исходный. */
+
+		let arr = [5, 3, 8, 1]
+
+		function filterRange(arr, a, b) {
+			return arr.filter((num) => num >= a && num <= b)
+		}
+
+		console.log(filterRange(arr, 2, 6))
+
+		/* Напишите функцию filterRangeInPlace(arr, a, b), которая принимает массив arr и удаляет из него все значения кроме тех, которые находятся между a и b. То есть, проверка имеет вид a ≤ arr[i] ≤ b.
+
+				Функция должна изменять принимаемый массив и ничего не возвращать. */
+
+		let arr2 = [5, 3, 8, 1]
+
+		function filterRangeInPlace(arr, a, b) {
+			for (let i = 0; i < arr.length; i++) {
+				const num = arr[i]
+				if (!(num >= a && num <= b)) {
+					arr.splice(i, 1)
+					i--
+				}
+			}
+		}
+		filterRangeInPlace(arr2, 5, 8)
+		console.log(arr2)
+
+		/* Сортировать в порядке по убыванию */
+
+		let arr3 = [5, 2, 1, -10, 8]
+
+		arr3.sort((a, b) => b - a)
+
+		console.log(arr3) // 8, 5, 2, 1, -10
+
+		/* У нас есть массив строк arr. Нужно получить отсортированную копию, но оставить arr неизменённым.
+
+		Создайте функцию copySorted(arr), которая будет возвращать такую копию */
+
+		let arr4 = ["HTML", "JavaScript", "CSS"]
+
+		let sorted = copySorted(arr4)
+
+		alert(sorted) // CSS, HTML, JavaScript
+		alert(arr4) // HTML, JavaScript, CSS (без изменений)
+	</script>
+</html>
